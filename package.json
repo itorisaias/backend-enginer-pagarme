@@ -9,6 +9,9 @@
   "main": "index.js",
   "author": "Itor Isaias <itorsilva@saofrancisco.com.br>",
   "license": "MIT",
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
