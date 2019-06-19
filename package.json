@@ -12,7 +12,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js --ignore __tests__",
-    "test": "jest"
+    "test": "jest",
+    "migrate:latest": "sequelize db:migrate",
+    "migrate:rollback": "sequelize db:migrate:undo:all"
   },
   "dependencies": {
     "cors": "^2.8.5",
