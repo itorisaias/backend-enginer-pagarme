@@ -10,8 +10,9 @@
   "author": "Itor Isaias <itorsilva@saofrancisco.com.br>",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
-    "dev": "nodemon ./src/index.js --ignore __tests__"
+    "start": "node src/index.js",
+    "dev": "nodemon ./src/index.js --ignore __tests__",
+    "test": "jest"
   },
   "dependencies": {
     "cors": "^2.8.5",
