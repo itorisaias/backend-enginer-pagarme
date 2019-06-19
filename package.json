@@ -1,7 +1,25 @@
 {
   "name": "pagarme",
+  "description": "Desafio backend pagarme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itorisaias/pagarme.git"
+  },
   "version": "1.0.0",
   "main": "index.js",
   "author": "Itor Isaias <itorsilva@saofrancisco.com.br>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.17.1",
+    "helmet": "^3.18.0",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.11.0",
+    "sequelize": "^5.8.10",
+    "swagger-ui-express": "^4.0.6",
+    "winston": "^3.2.1"
+  }
 }
