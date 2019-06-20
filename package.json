@@ -12,7 +12,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js --ignore __tests__",
-    "test": "jest",
+    "pretest": "NODE_ENV=test npm run migrate:latest",
+    "test": "NODE_ENV=test jest",
+    "posttest": "NODE_ENV=test npm run migrate:rollback",
     "migrate:latest": "sequelize db:migrate",
     "migrate:rollback": "sequelize db:migrate:undo:all"
   },
