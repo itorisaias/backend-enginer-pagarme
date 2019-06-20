@@ -1,0 +1,76 @@
+swagger: "2.0"
+info:
+  description: "Documentação sobre uso da API do gastarme"
+  version: "1.0.0"
+  title: "Swagger Gastarme"
+host: "localhost:3000"
+basePath: "/api"
+tags:
+  - name: "transaction"
+    description: "Operations about transaction"
+paths:
+  /v1/transactions:
+    post:
+      tags:
+        - "transaction"
+      operationId: "createTransaction"
+      parameters:
+        - in: "body"
+          name: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/Transaction"
+      responses:
+        201:
+          description: "successful operation"
+        400:
+          description: "unsuccessful operation"
+          schema:
+            $ref: "#/definitions/Error"
+      security:
+        - Bearer: []
+    get:
+      tags:
+        - "transaction"
+      operationId: "findAllTransaction"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Transaction"
+      security:
+        - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: "apiKey"
+    name: "Authorization"
+    in: header
+definitions:
+  Error:
+    type: "object"
+    properties:
+      message:
+        type: "string"
+      type:
+        type: "string"
+  Transaction:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+      amount:
+        type: "string"
+      cardNumber:
+        type: "string"
+      cardHolderName:
+        type: "string"
+      cardExpirationDate:
+        type: "string"
+      cardCvv:
+        type: "string"
+      paymentMethod:
+        type: "string"
+      descriptionTransaction:
+        type: "string"
