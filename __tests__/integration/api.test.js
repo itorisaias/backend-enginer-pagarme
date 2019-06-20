@@ -23,11 +23,11 @@ describe('API: Transactions', () => {
 
       expect(response.notFound).toBeFalsy()
     })
-    it('should response with status 200', async () => {
+    it('should response with status 201', async () => {
       const response = await request(app)
         .post('/api/v1/transactions')
 
-      expect(response.status).toBe(200)
+      expect(response.status).toBe(201)
     })
   })
 })
