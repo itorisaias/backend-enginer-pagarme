@@ -3,28 +3,28 @@ module.exports = (sequelize, DataTypes) => {
     amount: {
       type: DataTypes.STRING
     },
-    card_number: {
+    cardNumber: {
       type: DataTypes.STRING
     },
-    card_holder_name: {
+    cardHolderName: {
       type: DataTypes.STRING
     },
-    card_expiration_date: {
+    cardExpirationDate: {
       type: DataTypes.STRING
     },
-    card_cvv: {
+    cardCvv: {
       type: DataTypes.STRING
     },
-    payment_method: {
+    paymentMethod: {
       type: DataTypes.STRING
     },
-    description_transaction: {
+    descriptionTransaction: {
       type: DataTypes.STRING
     }
   }, {
     hooks: {
       beforeCreate: transaction => {
-        transaction.card_number = transaction.card_number
+        transaction.cardNumber = transaction.cardNumber
           .slice(-4)
           .padStart(16, '0')
       }
