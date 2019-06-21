@@ -1,5 +1,5 @@
 const moment = require('moment')
-const paymentConfigDefault = require('../config/payments.config')
+const paymentConfigDefault = require('../config/payables.config')
 
 moment.locale('pt-BR')
 
