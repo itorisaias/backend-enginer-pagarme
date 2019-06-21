@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
     descriptionTransaction: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    clientId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   }, {
     hooks: {
@@ -47,7 +51,10 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Transaction.associate = function (models) {
-    // associations can be defined here
+    Transaction.belongsTo(models.Client, {
+      foreignKey: 'clientId',
+      as: 'client'
+    })
   }
 
   return Transaction
