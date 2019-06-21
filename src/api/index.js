@@ -1,9 +1,12 @@
 const routes = require('express').Router()
 
 const TransactionController = require('../controllers/transactions')
-const { Transaction } = require('../database/models')
+const { PayableService, TransactionService } = require('../services')
 
-const transactionController = new TransactionController(Transaction)
+const transactionController = new TransactionController(
+  PayableService,
+  TransactionService
+)
 
 routes
   .route('/v1/transactions')
