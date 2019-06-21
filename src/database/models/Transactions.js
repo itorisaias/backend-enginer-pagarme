@@ -24,7 +24,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate: transaction => {
-        transaction.card_number = transaction.card_number.slice(-4)
+        transaction.card_number = transaction.card_number
+          .slice(-4)
+          .padStart(16, '0')
       }
     }
   })
