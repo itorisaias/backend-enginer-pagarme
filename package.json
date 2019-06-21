@@ -16,7 +16,8 @@
     "test": "NODE_ENV=test jest",
     "posttest": "NODE_ENV=test npm run migrate:rollback",
     "migrate:latest": "sequelize db:migrate",
-    "migrate:rollback": "sequelize db:migrate:undo:all"
+    "migrate:rollback": "sequelize db:migrate:undo:all",
+    "seed": "sequelize db:seed:all"
   },
   "dependencies": {
     "cors": "^2.8.5",
