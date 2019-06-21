@@ -1,3 +1,5 @@
+const paymentMethods = ['debit_card', 'credit_card']
+
 module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define('Transaction', {
     amount: {
@@ -16,7 +18,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     paymentMethod: {
-      type: DataTypes.STRING
+      type: DataTypes.ENUM(...Object.values(paymentMethods)),
+      allowNull: false,
+      validate: {
+        isIn: {
+          args: [Object.values(paymentMethods)],
+          msg: 'paymentMethod not allowed'
+        }
+      }
     },
     descriptionTransaction: {
       type: DataTypes.STRING
