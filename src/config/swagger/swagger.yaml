@@ -28,7 +28,7 @@ paths:
           schema:
             $ref: "#/definitions/Error"
       security:
-        - Bearer: []
+        - ApiKeyClient: []
     get:
       tags:
         - "transaction"
@@ -41,11 +41,11 @@ paths:
             items:
               $ref: "#/definitions/Transaction"
       security:
-        - Bearer: []
+        - ApiKeyClient: []
 securityDefinitions:
-  Bearer:
+  ApiKeyClient:
     type: "apiKey"
-    name: "Authorization"
+    name: "api_key"
     in: header
 definitions:
   Error:
