@@ -3,19 +3,24 @@ const paymentMethods = ['debit_card', 'credit_card']
 module.exports = (sequelize, DataTypes) => {
   const Transaction = sequelize.define('Transaction', {
     amount: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     cardNumber: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     cardHolderName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     cardExpirationDate: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     cardCvv: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     },
     paymentMethod: {
       type: DataTypes.ENUM(...Object.values(paymentMethods)),
@@ -28,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     descriptionTransaction: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     hooks: {
