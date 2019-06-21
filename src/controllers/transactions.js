@@ -5,7 +5,7 @@ class TransactionController {
 
   index (req, res, next) {
     return this.Model
-      .findAll()
+      .findAll({ order: [['createdAt', 'DESC']] })
       .then(transaction => res.send(transaction))
       .catch(next)
   }
