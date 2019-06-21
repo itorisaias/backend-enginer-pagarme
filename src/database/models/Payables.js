@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    payment_date: {
+    paymentDate: {
       type: DataTypes.DATE,
       allowNull: false
     },
