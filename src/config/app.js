@@ -6,6 +6,7 @@ const YAML = require('yamljs')
 const cors = require('cors')
 
 const routes = require('../api')
+const handleError = require('../middlewares/handleError')
 
 const pahtSwagger = path.join(__dirname, './swagger', 'swagger.yaml')
 const swaggerDocument = YAML.load(pahtSwagger)
@@ -19,5 +20,6 @@ app.use(express.urlencoded({
 app.use(express.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.use('/api', routes)
+app.use(handleError())
 
 module.exports = app
