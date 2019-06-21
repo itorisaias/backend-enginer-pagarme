@@ -1,8 +1,12 @@
 const request = require('supertest')
 const app = require('../../src/config/app')
-const factore = require('../utils/factore')
+const { factore, truncate } = require('../utils')
 
 describe('API: Transactions', () => {
+  beforeEach(async () => {
+    await truncate
+  })
+
   describe('GET /api/v1/transactions', () => {
     it('should exist router', async () => {
       const response = await request(app)

@@ -1,4 +1,4 @@
-const factore = require('./../../utils/factore')
+const { factore, truncate } = require('./../../utils')
 const TransactionController = require('../../../src/controllers/transactions')
 
 const transactionFake = () => factore.attrs('Transaction')
@@ -19,6 +19,10 @@ const mockModel = (value) => ({
 })
 
 describe('Controller: TransactionController', () => {
+  beforeEach(async () => {
+    await truncate
+  })
+
   describe('store method', () => {
     it('should return new transaction', async () => {
       const transaction = await transactionFake()
