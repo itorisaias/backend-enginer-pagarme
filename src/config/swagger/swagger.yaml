@@ -8,12 +8,14 @@ basePath: "/api"
 tags:
   - name: "transaction"
     description: "Operations about transaction"
+  - name: "payable"
+    description: "Operations about payable"
 paths:
   /v1/transactions:
     post:
       tags:
         - "transaction"
-      operationId: "createTransaction"
+      operationId: "storeTransaction"
       parameters:
         - in: "body"
           name: "body"
@@ -32,7 +34,7 @@ paths:
     get:
       tags:
         - "transaction"
-      operationId: "findAllTransaction"
+      operationId: "indexTransaction"
       responses:
         200:
           description: "successful operation"
@@ -40,6 +42,26 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/Transaction"
+      security:
+        - ApiKeyClient: []
+  /v1/payables:
+    get:
+      tags:
+        - "payable"
+      operationId: "filterPayable"
+      parameters:
+      - name: "status"
+        in: "query"
+        required: true
+        type: string
+        enum: [available, waiting_funds]
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Extract"
       security:
         - ApiKeyClient: []
 securityDefinitions:
@@ -62,15 +84,51 @@ definitions:
         type: "integer"
       amount:
         type: "string"
+        required: true
       cardNumber:
         type: "string"
+        required: true
       cardHolderName:
         type: "string"
+        required: true
       cardExpirationDate:
         type: "string"
+        required: true
       cardCvv:
         type: "string"
+        required: true
       paymentMethod:
         type: "string"
+        required: true
+        enum: [available, waiting_funds]
       descriptionTransaction:
         type: "string"
+        required: true
+  Payable:
+    type: "object"
+    properties:
+      status:
+        type: string
+        required: true
+      paymentDate:
+        type: string
+        required: true
+      fee:
+        type: number
+        required: true
+      transactionId:
+        type: number
+        required: true
+  Extract:
+    type: "object"
+    properties:
+      value:
+        type: number
+        required: true
+      detail:
+        type: "array"
+        required: true
+        items:
+          $ref: "#/definitions/Payable"
+
+
