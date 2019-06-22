@@ -22,7 +22,7 @@ class PayableService {
       const payable = await this.PayableModel.create({
         transactionId,
         status,
-        paymentDate: moment().add(amountDay, 'days').format('L'),
+        paymentDate: moment().add(amountDay, 'days'),
         fee: ((percentageFee * amount) / 100)
       })
 
