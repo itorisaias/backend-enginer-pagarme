@@ -1,8 +1,10 @@
 const { ValidationError } = require('sequelize')
 const PagarmeError = require('../helpers/PagarmeError')
+const log = require('../utils/logger').getInstance('server')
 
 function handleError (err, req, res, next) {
   const error = new PagarmeError()
+  log.error(err)
 
   if (err instanceof ValidationError) {
     error.message = err.errors[0].message
