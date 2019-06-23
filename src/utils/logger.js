@@ -19,8 +19,11 @@ class Logger {
       ]
     })
 
-    if (['debug', 'silly'].includes(level)) {
-      // TODO add transports.File
+    if (process.env.DEBUG) {
+      logger.add(new winston.transports.File({
+        filename: 'pagarme.log',
+        level: this.getLevel()
+      }))
     }
 
     return logger
