@@ -1,4 +1,5 @@
 module.exports = {
   authorizer: require('./authorizer'),
-  handleError: require('./handleError')
+  handleError: require('./handleError'),
+  logging: require('./logging')
 }

@@ -8,7 +8,8 @@ const cors = require('cors')
 const routes = require('../api')
 const {
   handleError,
-  authorizer
+  authorizer,
+  logging
 } = require('../middlewares')
 
 const pahtSwagger = path.join(__dirname, './swagger', 'swagger.yaml')
@@ -16,6 +17,7 @@ const swaggerDocument = YAML.load(pahtSwagger)
 const app = express()
 
 app.use(cors())
+app.use(logging())
 app.use(helmet())
 app.use(express.urlencoded({
   extended: true
