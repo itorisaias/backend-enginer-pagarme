@@ -1,4 +1,5 @@
 const moment = require('moment')
+const uuui = require('uuid/v4')
 const { PayableService, TransactionService } = require('../../services')
 
 module.exports = {
@@ -56,19 +57,19 @@ module.exports = {
     createClient: async (parent, { input }, { models }) => {
       const client = await models.Client.create({
         ...input,
-        apiKey: 'MYKEY'
+        apiKey: uuui()
       })
       return client
     },
-    createTransaction: async (parent, { input }, { models }) => {
+    createTransaction: async (parent, { input }, { models, client: { id } }) => {
       const {
         Payable: PayableModel,
         Transaction: TransactionModel
       } = models
       const payableService = new PayableService(PayableModel, TransactionModel)
       const transactionService = new TransactionService(TransactionModel)
-      console.log(input)
-      const transaction = await transactionService.store(1, input)
+
+      const transaction = await transactionService.store(id, input)
       await payableService.store(transaction)
 
       return transaction

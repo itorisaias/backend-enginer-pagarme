@@ -75,3 +75,7 @@ npm run test
 - [**winston**](https://github.com/winstonjs/winston#readme)
 - [**morgan**](https://github.com/expressjs/morgan) Middleware de logger de solicitação de HTTP para node.js
 - [**moment**](https://moment.com) O Moment.js é um pacote open source que pode ser utilizado para validar, manipular e fazer o parse de datas no JavaScript.
+
+## Extra
+
+Serviço no grahpql `http://locahost:<PORT>/graphql`, falta algumas implementações, porém é apenas para prova de conveito
