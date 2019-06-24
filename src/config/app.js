@@ -5,7 +5,7 @@ const helmet = require('helmet')
 const YAML = require('yamljs')
 const cors = require('cors')
 
-const routes = require('../api')
+const routes = require('../routes')
 const {
   handleError,
   authorizer,
