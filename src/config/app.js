@@ -8,7 +8,6 @@ const cors = require('cors')
 const routes = require('../routes')
 const {
   handleError,
-  authorizer,
   logging
 } = require('../middlewares')
 
@@ -24,7 +23,6 @@ app.use(express.urlencoded({
 }))
 app.use(express.json())
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-app.use(authorizer())
 app.use('/api', routes)
 app.use(handleError())
 

@@ -1,5 +1,6 @@
 const routes = require('express').Router()
 
+const { authorizer } = require('../middlewares')
 const { TransactionsController, BalancesController } = require('../controllers')
 const { PayableService, TransactionService } = require('../services')
 
@@ -8,6 +9,8 @@ const transactionsController = new TransactionsController(
   PayableService,
   TransactionService
 )
+
+routes.use(authorizer())
 
 routes
   .route('/v1/transactions')
