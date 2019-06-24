@@ -31,7 +31,7 @@ class TransactionController {
   }
 
   async store (req, res, next) {
-    const payableService = new this.PayableService(this.PayableModel)
+    const payableService = new this.PayableService(this.PayableModel, this.TransactionModel)
     const transactionService = new this.TransactionService(this.TransactionModel)
     const {
       id: clientId

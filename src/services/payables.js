@@ -4,8 +4,9 @@ const paymentConfigDefault = require('../config/payables.config')
 moment.locale('pt-BR')
 
 class PayableService {
-  constructor (PayableModel, paymentConfig = paymentConfigDefault) {
+  constructor (PayableModel, TransactionModel, paymentConfig = paymentConfigDefault) {
     this.PayableModel = PayableModel
+    this.TransactionModel = TransactionModel
     this.paymentConfig = paymentConfig
   }
 
@@ -30,6 +31,21 @@ class PayableService {
     } catch (error) {
       throw error
     }
+  }
+
+  findTransactionPayable (clientId) {
+    return this.PayableModel
+      .findAll({
+        include: [
+          {
+            model: this.TransactionModel,
+            as: 'transaction',
+            where: {
+              clientId
+            }
+          }
+        ]
+      })
   }
 }
 
