@@ -1,15 +1,15 @@
 swagger: "2.0"
 info:
-  description: "Documentação sobre uso da API do gastarme"
+  description: "Guia de referências da API"
   version: "1.0.0"
-  title: "Swagger Gastarme"
+  title: "Gastarme"
 host: "localhost:3000"
 basePath: "/api"
 tags:
   - name: "transaction"
     description: "Operations about transaction"
-  - name: "payable"
-    description: "Operations about payable"
+  - name: "balance"
+    description: "Operations about balance"
 paths:
   /v1/transactions:
     post:
@@ -44,24 +44,18 @@ paths:
               $ref: "#/definitions/Transaction"
       security:
         - ApiKeyClient: []
-  /v1/payables:
+  /v1/balances:
     get:
       tags:
-        - "payable"
-      operationId: "filterPayable"
-      parameters:
-      - name: "status"
-        in: "query"
-        required: true
-        type: string
-        enum: [available, waiting_funds]
+        - "balance"
+      operationId: "indexBalance"
       responses:
         200:
           description: "successful operation"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Extract"
+              $ref: "#/definitions/Balance"
       security:
         - ApiKeyClient: []
 securityDefinitions:
@@ -100,7 +94,7 @@ definitions:
       paymentMethod:
         type: "string"
         required: true
-        enum: [available, waiting_funds]
+        enum: [debit_card, credit_card]
       descriptionTransaction:
         type: "string"
         required: true
@@ -119,7 +113,7 @@ definitions:
       transactionId:
         type: number
         required: true
-  Extract:
+  Balance:
     type: "object"
     properties:
       value:
