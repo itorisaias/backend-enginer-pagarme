@@ -98,31 +98,18 @@ definitions:
       descriptionTransaction:
         type: "string"
         required: true
-  Payable:
-    type: "object"
-    properties:
-      status:
-        type: string
-        required: true
-      paymentDate:
-        type: string
-        required: true
-      fee:
-        type: number
-        required: true
-      transactionId:
-        type: number
-        required: true
   Balance:
     type: "object"
     properties:
-      value:
-        type: number
-        required: true
-      detail:
-        type: "array"
-        required: true
-        items:
-          $ref: "#/definitions/Payable"
-
-
+      waiting_funds:
+        type: object
+        properties:
+          amount:
+            type: number
+            required: true
+      available:
+        type: object
+        properties:
+          amount:
+            type: number
+            required: true
