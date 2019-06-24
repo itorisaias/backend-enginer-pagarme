@@ -1,8 +1,11 @@
 const http = require('http')
+const graphql = require('./graphql')
 const app = require('./app')
 const log = require('../utils/logger').getInstance('server')
 
 const server = http.createServer(app)
+
+graphql.start(app)
 
 server.on('error', err => {
   if (err.syscall !== 'listen') {
