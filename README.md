@@ -4,9 +4,8 @@ Projeto para vaga de backend enginer na pagarme, desenvolvimento de um Payment S
 
 ## Softwares necessarios
 
-- [NodeJS](https://nodejs.com.br)
-- [Git](https://git.com)
-- [Docker](https://docker.com) (apenas se se for utilizar com ambiente em container)
+- [Nodejs && NPM](https://nodejs.org)
+- [Git](https://git-scm.com/book/pt-br/v2/Come%C3%A7ando-Instalando-o-Git)
 
 ## Configuração do projeto
 
@@ -25,34 +24,33 @@ Instale as dependências do projeto
 npm install
 ```
 
-Carregamento de configurações de ambiente
+Carregamento de configurações de ambiente, crie um arquivo `.env` na raiz do projeto, você pode encontrar um exemplo na raiz do projeto `.env.example`, lembre-se de colocar suas configurações, este é apenas um modelo do que o projeto precisa.
 ```sh
 cp .env.example .env
 ```
 
-## Desenvolvimento
+## Carregar ambiente de desenvolvimento
 
-Antes de subir o ambiente em desenvovimento garanta que as configurações do `.env` está correta.
+Antes de subir o ambiente em desenvovimento garanta que as configurações do `.env` esteja correta.
 
 Aplique as migrates de banco
 ```sh
 npm run migrate:latest
 ```
 
-Criar dados basico para
+Criar dados defaults para teste
 ```sh
 npm run seed
-```
-
-Caso queira reverter as migrates do banco
-```sh
-npm run migrate:rollback
 ```
 
 Subir a aplicação local
 ```sh
 npm run dev
 ```
+
+E acesse `https://localhost:<PORT>/api-docs` irá abrir a documentação da aplicação.
+
+Os usuario defaults para teste que foram criados, podem ser encontrado em `./src/database/seeders/20190621051522-client.js`
 
 ## Executar testes unitários e de integrações
 
@@ -61,23 +59,12 @@ Para executar os teste execute
 npm run test
 ```
 
-## Estrutura do projeto
-
-  - `/src/config` -
-  - `/src/controllers` -
-  - `/src/database` -
-  - `/src/helpers` -
-  - `/src/middlewares` -
-  - `/src/routes` -
-  - `/src/services` -
-  - `/src/utils` -
-
 ## Bibliotecas utilizadas
 
-- [express](https://expresjs.com) Framework de aplicativo web para o Node.js
-- [dotenv](https://expresjs.com) Dotenv é um módulo de dependência que carrega variáveis ​​de ambiente de um arquivo .env em process.env.
-- [factory-girl](https://expresjs.com) Criar dados para teste
-- [sequelize](https://expresjs.com) Sequelize é um ORM baseado em promessa para o Node.js.
-- [winston](https://expresjs.com)
-- [morgan](https://expresjs.com) Middleware de logger de solicitação de HTTP para node.js
-- [moment](https://expresjs.com) O Moment.js é um pacote open source que pode ser utilizado para validar, manipular e fazer o parse de datas no JavaScript.
+- [**express**](https://github.com/expressjs) Framework de aplicativo web para o Node.js
+- [**dotenv**](https://github.com/motdotla/dotenv) Dotenv é um módulo de dependência que carrega variáveis ​​de ambiente de um arquivo .env em process.env.
+- [**factory-girl**](https://github.com/aexmachina/factory-girl#readme) factory-girl é uma biblioteca de fábrica para o Node.js. Trabalha de forma assíncrona e suporta associações e o uso de funções para gerar atributos.
+- [**sequelize**](http://docs.sequelizejs.com/) Sequelize é um ORM baseado em promessa para o Node.js.
+- [**winston**](https://github.com/winstonjs/winston#readme)
+- [**morgan**](https://github.com/expressjs/morgan) Middleware de logger de solicitação de HTTP para node.js
+- [**moment**](https://moment.com) O Moment.js é um pacote open source que pode ser utilizado para validar, manipular e fazer o parse de datas no JavaScript.
