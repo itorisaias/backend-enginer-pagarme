@@ -52,6 +52,13 @@ E acesse `https://localhost:<PORT>/api-docs` irá abrir a documentação da apli
 
 Os usuario defaults para teste que foram criados, podem ser encontrado em `./src/database/seeders/20190621051522-client.js`
 
+## Carregar ambiente de produção
+
+Inicializar aplicação
+```sh
+npm start
+```
+
 ## Executar testes unitários e de integrações
 
 Para executar os teste execute
