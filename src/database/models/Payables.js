@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
 
   Payable.associate = function (models) {
     Payable.belongsTo(models.Transaction, {
-      foreignKey: 'trasanctionId',
-      as: 'trasanction'
+      foreignKey: 'transactionId',
+      as: 'transaction'
     })
   }
 
