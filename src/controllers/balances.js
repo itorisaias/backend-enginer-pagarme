@@ -6,12 +6,10 @@ const {
 class BalancesController {
   constructor (
     PayablesService,
-    TransactionsService,
     TransactionModel = Transaction,
     PayableModel = Payable
   ) {
     this.PayablesService = PayablesService
-    this.TransactionsService = TransactionsService
     this.TransactionModel = TransactionModel
     this.PayableModel = PayableModel
   }

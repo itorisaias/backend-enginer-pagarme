@@ -3,11 +3,8 @@ const routes = require('express').Router()
 const { TransactionsController, BalancesController } = require('../controllers')
 const { PayableService, TransactionService } = require('../services')
 
+const balancesController = new BalancesController(PayableService)
 const transactionsController = new TransactionsController(
-  PayableService,
-  TransactionService
-)
-const balancesController = new BalancesController(
   PayableService,
   TransactionService
 )
