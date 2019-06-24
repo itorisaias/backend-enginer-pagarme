@@ -21,8 +21,7 @@ class Logger {
 
     if (process.env.DEBUG) {
       logger.add(new winston.transports.File({
-        filename: 'pagarme.log',
-        level: this.getLevel()
+        filename: 'pagarme.log'
       }))
     }
 
