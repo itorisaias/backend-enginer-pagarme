@@ -10,6 +10,7 @@
   "author": "Itor Isaias <itorsilva@saofrancisco.com.br>",
   "license": "MIT",
   "scripts": {
+    "prestart": "npm run migrate:latest",
     "start": "node src/index.js",
     "dev": "nodemon ./src/index.js --ignore __tests__",
     "pretest": "NODE_ENV=test npm run migrate:latest",
