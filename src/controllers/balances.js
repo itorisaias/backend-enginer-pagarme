@@ -38,7 +38,7 @@ class BalancesController {
   }
 
   computeBalance (status) {
-    if (this.transactionPayable) {
+    if (!this.transactionPayable) {
       return null
     }
 
