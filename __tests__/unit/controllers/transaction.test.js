@@ -1,74 +1,91 @@
-const { factore, truncate } = require('./../../utils')
-const TransactionController = require('../../../src/controllers/transactions')
-
-const transactionFake = () => factore.attrs('Transaction')
-const mockResponse = () => {
-  const res = {}
-  res.status = jest.fn().mockReturnValue(res)
-  res.json = jest.fn().mockReturnValue(res)
-  res.send = jest.fn().mockReturnValue(res)
-  return res
-}
-const mockRequest = (body = {}, params = {}) => ({
-  body,
-  params
-})
-const mockModel = (value) => ({
-  findAll: jest.fn().mockResolvedValue(value),
-  create: jest.fn().mockResolvedValue(value)
-})
+const { factore } = require('./../../utils')
+const { TransactionsController } = require('../../../src/controllers')
 
 describe('Controller: TransactionController', () => {
-  beforeEach(async () => {
-    await truncate
-  })
-
-  describe('store method', () => {
+  const mockResponse = () => {
+    const res = {}
+    res.status = jest.fn().mockReturnValue(res)
+    res.json = jest.fn().mockReturnValue(res)
+    res.send = jest.fn().mockReturnValue(res)
+    return res
+  }
+  describe('method: store', () => {
     it('should return new transaction', async () => {
-      const transaction = await transactionFake()
-      const req = mockRequest(transaction)
+      const transaction = await factore.attrs('Transaction')
+      class PayableService {
+        store (transaction) {
+          return Promise.resolve(transaction)
+        }
+      }
+      class TransactionService {
+        store (_, transaction) {
+          return Promise.resolve(transaction)
+        }
+      }
+      const transactionController = new TransactionsController(
+        PayableService,
+        TransactionService
+      )
+
+      const req = { client: { id: 1 }, body: transaction }
       const res = mockResponse()
-      const model = mockModel(transaction)
-      const transactionController = new TransactionController(model)
 
       await transactionController.store(req, res, null)
 
-      expect(res.json).toHaveBeenCalledWith(transaction)
-      expect(res.status).toHaveBeenCalledWith(201)
+      expect(res.json).toBeCalledWith(transaction)
+      expect(res.status).toBeCalledWith(201)
     })
     it('should call next when error', async () => {
-      const model = {
-        create: jest.fn().mockRejectedValue()
+      class PayableService {
+        store (transaction) {
+          return Promise.reject(transaction)
+        }
       }
-      const req = mockRequest()
-      const transactionController = new TransactionController(model)
+      class TransactionService {
+        store (transaction) {
+          return Promise.reject(transaction)
+        }
+      }
+      const transactionsController = new TransactionsController(
+        PayableService,
+        TransactionService
+      )
+
+      const req = { client: { id: 1 } }
       const next = jest.fn()
 
-      await transactionController.store(req, null, next)
+      await transactionsController.store(req, null, next)
 
       expect(next).toBeCalled()
     })
   })
-  describe('index method', () => {
+  describe('method: index', () => {
     it('should find all transaction', async () => {
-      const transaction = await transactionFake()
-      const model = mockModel([transaction])
-      const transactionController = new TransactionController(model)
-      const req = mockRequest()
+      const transaction = await factore.attrs('Transaction')
+      class TransactionService {
+        index (_) {
+          return Promise.resolve([transaction])
+        }
+      }
+      const transactionController = new TransactionsController(null, TransactionService)
+      const req = { client: { id: 1 } }
       const res = mockResponse()
 
       await transactionController.index(req, res, null)
 
-      expect(res.send).toHaveBeenCalledWith([transaction])
+      expect(res.send).toBeCalledWith([transaction])
     })
     it('should call next when error ', async () => {
-      const model = {
-        findAll: jest.fn().mockRejectedValue()
+      class TransactionService {
+        index (clientId) {
+          return Promise.reject(clientId)
+        }
       }
-      const transactionController = new TransactionController(model)
+      const transactionController = new TransactionsController(null, TransactionService)
+      const req = { client: { id: 1 } }
       const next = jest.fn()
 
-      await transactionController.index(null, null, next)
+      await transactionController.index(req, null, next)
 
       expect(next).toBeCalled()
     })
