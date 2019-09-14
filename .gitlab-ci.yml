@@ -1,0 +1,35 @@
+image: "node:10.15.3-alpine"
+
+stages:
+  - validate
+  - test
+  - build
+  - artifact
+  - deploy
+
+cache:
+  paths:
+    - node_modules/
+
+validate:
+  stage: validate
+  script:
+    - echo "Validate"
+    - npm run lint
+
+codecheck:
+  stage: validate
+  script:
+    - echo "Code Check"
+
+install_dependencies:
+  stage: build
+  script:
+    - npm install
+  artifacts:
+    paths:
+      - node_modules/
+
+testing_testing:
+  stage: test
+  script: npm test
