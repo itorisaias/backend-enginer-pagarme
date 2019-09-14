@@ -27,12 +27,9 @@ testing_testing:
   stage: test
   script:
     - npm test
-    - mkdir public
-    - mv __tests__/covarage/lcov-report/** public
   artifacts:
     paths:
-      - __tests__/coverage
-      - public
+      - coverage
 
 deploy-heroku-production:
   stage: deploy
