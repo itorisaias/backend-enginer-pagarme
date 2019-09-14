@@ -1,5 +1,9 @@
 # Desafio Backend Pagarme
 
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![pipeline status](https://gitlab.com/itor.isaias/backend-enginer-pagarme/badges/master/pipeline.svg)](https://gitlab.com/itor.isaias/backend-enginer-pagarme/commits/master)
+[![Codecov Coverage](https://img.shields.io/codecov/c/github/itorisaias/backend-enginer-pagarme/master.svg?style=flat-square)](https://codecov.io/gh/itorisaias/backend-enginer-pagarme/)
+
 Projeto para vaga de backend enginer na pagarme, desenvolvimento de um Payment Service Provider (PSP).
 
 ## Softwares necessarios
