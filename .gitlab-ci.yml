@@ -27,6 +27,8 @@ testing_testing:
   stage: test
   script:
     - npm test
+    - npm install codecov
+    - ./node_modules/.bin/codecov --token=$TOKEN_CODECOV
   artifacts:
     paths:
       - coverage
