@@ -3,6 +3,7 @@ image: node:10.15.3-alpine
 stages:
   - validate
   - test
+  - coverage
   - build
   - artifact
   - deploy
@@ -11,40 +12,40 @@ cache:
   paths:
     - node_modules/
 
-validate:
+before_script:
+  - npm install
+
+quality:
   stage: validate
   script:
-    - npm install
-    - echo "Validate"
+    - echo "Linter code"
     - npm run lint
 
-codecheck:
-  stage: validate
-  script:
-    - echo "Code Check"
-
-testing_testing:
+unit-test:
   stage: test
   script:
     - npm test
-    - npm install codecov
-    - ./node_modules/.bin/codecov --token=$TOKEN_CODECOV
   artifacts:
     paths:
       - coverage
 
-deploy-heroku-production:
-  stage: deploy
-  image: ruby:latest
+coverage:
+  stage: coverage
   script:
-    - echo "Deploy App to Heroku"
-    - apt-get update -qy
-    - apt-get install -y ruby-dev
-    - gem install dpl
-    - dpl --provider=heroku --app=backend-enginer-pagarme --api-key=$HEROKU_KEY
+    - echo "Coverage"
+    - npm install codecov
+    - ./node_modules/.bin/codecov --token=$TOKEN_CODECOV
+
+deploy-prod:
+  stage: deploy
+  before_script:
+    - git checkout master
+  script:
+    - apk add --no-cache git
+    - git remote add heroku https://itor.isaias:$HEROKU_KEY@git.heroku.com/backend-enginer-pagarme.git
+    - git push heroku HEAD:master -f
   environment:
-    name: production
-    url: https://backend-enginer-pagarme.herokuapps.com
-  when: manual
+    name: producao
+    url: https://backend-enginer-pagarme.herokuapp.com
   only:
     - master
