@@ -18,7 +18,8 @@
     "posttest": "NODE_ENV=test npm run migrate:rollback",
     "migrate:latest": "sequelize db:migrate",
     "migrate:rollback": "sequelize db:migrate:undo:all",
-    "seed": "sequelize db:seed:all"
+    "seed": "sequelize db:seed:all",
+    "lint": "eslint src"
   },
   "dependencies": {
     "cors": "^2.8.5",
