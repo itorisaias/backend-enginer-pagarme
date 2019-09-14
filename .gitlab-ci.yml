@@ -1,4 +1,4 @@
-image: "node:10.15.3-alpine"
+image: node:10.15.3-alpine
 
 stages:
   - validate
@@ -41,6 +41,10 @@ deploy-heroku-production:
   stage: deploy
   script:
     - echo "Deploy App to Heroku"
+    - apk update && apk upgrade
+    - apk add --no-cache git ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=backend-enginer-pagarme --api-key=$HEROKU_KEY
     - git remote add heroku https://itor.isaias:$HEROKU_KEY@git.heroku.com/backend-enginer-pagarme.git
     - git push heroku ${CI_COMMIT_REF_NAME}
   environment:
