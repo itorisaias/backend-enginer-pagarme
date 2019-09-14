@@ -36,3 +36,16 @@ install_dependencies:
 testing_testing:
   stage: test
   script: npm test
+
+deploy-heroku-production:
+  stage: deploy
+  script:
+    - echo "Deploy App to Heroku"
+    - git remote add heroku https://itor.isaias:$HEROKU_KEY@git.heroku.com/backend-enginer-pagarme.git
+    - git push heroku ${CI_COMMIT_REF_NAME}
+  environment:
+    name: production
+    url: https://backend-enginer-pagarme.herokuapps.com
+  when: manual
+  only:
+    - master
